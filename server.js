@@ -37,7 +37,8 @@ app.post('/deletefavourites',async(req,res)=>{
         if(user){
             await model.findOneAndUpdate({email:req.body.email},{$pull:{songs:req.body.songs}},{ upsert: true, new: true, setDefaultsOnInsert: true })
             let data=await model.findOne({email:req.body.email});
-            res.status(200).json(data.songs)
+        (data)?res.status(200).json(data.songs):res.status(401).json([])
+        console.log("Done");
         }
         else{
             res.sendStatus(401);
