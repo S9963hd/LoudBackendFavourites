@@ -52,7 +52,7 @@ app.post('/getfavourites',async(req,res)=>{
     console.log(req.body);
     try{
         let data=await model.findOne({email:req.body.email});
-        (data)?res.status(200).json(data.songs):res.status(401).json([])
+        (data)?res.status(200).json(data.songs):res.status(201).json([])
         console.log("Done");
     }
     catch(err){
